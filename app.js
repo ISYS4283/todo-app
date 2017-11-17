@@ -1,22 +1,3 @@
-// Full spec-compliant TodoMVC with localStorage persistence
-// and hash-based routing in ~120 effective lines of JavaScript.
-
-// localStorage persistence
-var STORAGE_KEY = 'todos-vuejs-2.0'
-var todoStorage = {
-  fetch: function () {
-    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-    todos.forEach(function (todo, index) {
-      todo.id = index
-    })
-    todoStorage.uid = todos.length
-    return todos
-  },
-  save: function (todos) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
-  }
-}
-
 // visibility filters
 var filters = {
   all: function (todos) {
@@ -35,20 +16,24 @@ var filters = {
 }
 
 // app Vue instance
+Vue.use(VueResource);
 var app = new Vue({
   // app initial state
   data: {
-    todos: todoStorage.fetch(),
+    todos: [],
     newTodo: '',
     editedTodo: null,
     visibility: 'all'
+  },
+
+  created: function () {
+    this.fetchData()
   },
 
   // watch todos change for localStorage persistence
   watch: {
     todos: {
       handler: function (todos) {
-        todoStorage.save(todos)
       },
       deep: true
     }
@@ -84,13 +69,17 @@ var app = new Vue({
   // methods that implement data logic.
   // note there's no DOM manipulation here at all.
   methods: {
+    fetchData: function () {
+      var self = this;
+      this.$http.get('/todos').then((response) => self.todos = response.body);
+    },
+
     addTodo: function () {
       var value = this.newTodo && this.newTodo.trim()
       if (!value) {
         return
       }
       this.todos.push({
-        id: todoStorage.uid++,
         title: value,
         completed: false
       })
