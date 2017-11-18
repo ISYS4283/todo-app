@@ -8,20 +8,15 @@ $db = require __DIR__.'/../pdo.php';
 require __DIR__.'/Repository.php';
 $repository = new Repository($db);
 
-if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    $todos = parsePutJson();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $todo = parseRequestJson();
 
-    foreach ($todos as &$todo) {
-        if (isset($todo['id'])) {
-            $repository->update($todo);
-        } else {
-            $todo['id'] = $repository->create($todo);
-        }
-    }
+    $todo['id'] = $repository->create($todo);
 
-    $repository->syncDelete($todos);
+    header('Content-Type: application/json');
 
-    http_response_code(204);
+    echo json_encode($todo);
+
     die();
 }
 

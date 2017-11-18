@@ -80,10 +80,17 @@ var app = new Vue({
       if (!value) {
         return
       }
-      this.todos.push({
+      var todo = {
         title: value,
-        completed: false
-      })
+        completed: false,
+      }
+
+      var self = this;
+      this.$http.post('/todos', todo)
+        .then(function (response) {
+            todo = response.body;
+            self.todos.push(todo);
+        });
       this.newTodo = ''
     },
 
