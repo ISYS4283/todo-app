@@ -29,13 +29,7 @@ header('Content-Type: application/json');
 
 echo json_encode($repository->get());
 
-function parsePutJson() : array
+function parseRequestJson() : array
 {
-    $putfp = fopen('php://input', 'r');
-    $putdata = '';
-    while($data = fread($putfp, 1024)) {
-        $putdata .= $data;
-    }
-    fclose($putfp);
-    return json_decode($putdata, true);
+    return json_decode(file_get_contents('php://input'), true);
 }
