@@ -6,23 +6,28 @@ error_reporting(E_ALL);
 
 $db = require __DIR__.'/../pdo.php';
 require __DIR__.'/ToDos.php';
-$todos = new ToDos($db);
+$repository = new ToDos($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    foreach (parsePutJson() as $todo) {
+    $todos = parsePutJson();
+
+    foreach ($todos as &$todo) {
         if (isset($todo['id'])) {
-            $todos->update($todo);
+            $repository->update($todo);
         } else {
-            $todos->create($todo);
+            $todo['id'] = $repository->create($todo);
         }
     }
+
+    $repository->syncDelete($todos);
+
     http_response_code(204);
     die();
 }
 
 header('Content-Type: application/json');
 
-echo json_encode($todos->get());
+echo json_encode($repository->get());
 
 function parsePutJson() : array
 {
