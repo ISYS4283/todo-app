@@ -95,7 +95,8 @@ var app = new Vue({
     },
 
     removeTodo: function (todo) {
-      this.todos.splice(this.todos.indexOf(todo), 1)
+        this.$http.delete(`/todos?id=${todo.id}`)
+            .then((response) => this.todos.splice(this.todos.indexOf(todo), 1));
     },
 
     editTodo: function (todo) {

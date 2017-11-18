@@ -42,6 +42,13 @@ class Repository
         }
     }
 
+    public function delete(int $id) : bool
+    {
+        $sql = 'DELETE FROM todos WHERE id = ?';
+
+        return $this->db->prepare($sql)->execute([$id]);
+    }
+
     public function syncDelete(array $todos) : bool
     {
         $ids = $this->getMissingIds($todos);
