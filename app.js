@@ -34,6 +34,7 @@ var app = new Vue({
   watch: {
     todos: {
       handler: function (todos) {
+          this.$http.put('/todos', JSON.stringify(todos));
       },
       deep: true
     }
