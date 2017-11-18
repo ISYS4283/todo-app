@@ -1,6 +1,6 @@
 <?php
 
-class ToDos
+class Repository
 {
     protected $db;
 

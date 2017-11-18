@@ -5,8 +5,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $db = require __DIR__.'/../pdo.php';
-require __DIR__.'/ToDos.php';
-$repository = new ToDos($db);
+require __DIR__.'/Repository.php';
+$repository = new Repository($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $todos = parsePutJson();
