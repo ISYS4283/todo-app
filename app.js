@@ -30,16 +30,6 @@ var app = new Vue({
     this.fetchData()
   },
 
-  // watch todos change for localStorage persistence
-  watch: {
-    todos: {
-      handler: function (todos) {
-          this.$http.put('/todos', JSON.stringify(todos));
-      },
-      deep: true
-    }
-  },
-
   // computed properties
   // http://vuejs.org/guide/computed.html
   computed: {
