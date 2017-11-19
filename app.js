@@ -84,6 +84,13 @@ var app = new Vue({
       this.newTodo = ''
     },
 
+    toggleCompleted: function (todo) {
+        this.$http.put(`/todos?id=${todo.id}`, todo).then(
+            response => todo = response.body,
+            response => console.error(response.body),
+        );
+    },
+
     removeTodo: function (todo) {
         this.$http.delete(`/todos?id=${todo.id}`)
             .then((response) => this.todos.splice(this.todos.indexOf(todo), 1));
