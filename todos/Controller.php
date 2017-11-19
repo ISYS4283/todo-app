@@ -31,7 +31,14 @@ class Controller
 
     protected function put() : string
     {
+        $id = $this->getId();
+
+        if ($id === false) {
+            return $this->sendBadRequest();
+        }
+
         $todo = $this->parseRequestJson();
+
         if ($this->repository->update($todo)) {
             return $this->sendJson($todo);
         }
