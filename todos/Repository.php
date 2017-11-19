@@ -60,49 +60,10 @@ class Repository
         return $this->db->prepare($sql)->execute([$id]);
     }
 
-    public function syncDelete(array $todos) : bool
-    {
-        $ids = $this->getMissingIds($todos);
-
-        $sql = 'DELETE FROM todos WHERE id IN %s';
-
-        $sql = sprintf($sql, $this->getArrayBindPlaceholders($ids));
-
-        return $this->db->prepare($sql)->execute($ids);
-    }
-
     protected function filter(array $todo, array $whitelist) : array
     {
         $todo['completed'] = (int)$todo['completed'];
 
         return array_intersect_key($todo, array_flip($whitelist));
-    }
-
-    protected function getMissingIds(array $todos) : array
-    {
-        $ids = [];
-        foreach ($todos as $todo) {
-            if (isset($todo['id'])) {
-                $ids []= $todo['id'];
-            }
-        }
-
-        $sql = 'SELECT id FROM todos';
-        $rows = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($rows as $row) {
-            if (!in_array($row['id'], $ids)) {
-                $missing []= $row['id'];
-            }
-        }
-
-        return $missing ?? [];
-    }
-
-    protected function getArrayBindPlaceholders(array $variables) : string
-    {
-        $placeholders = str_repeat('?', count($variables));
-        $placeholders = implode(',', str_split($placeholders));
-        return "($placeholders)";
     }
 }
