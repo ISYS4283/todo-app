@@ -27,7 +27,7 @@ var app = new Vue({
   },
 
   created: function () {
-    this.fetchData()
+    this.getTodos()
   },
 
   // computed properties
@@ -60,9 +60,12 @@ var app = new Vue({
   // methods that implement data logic.
   // note there's no DOM manipulation here at all.
   methods: {
-    fetchData: function () {
-      var self = this;
-      this.$http.get('/todos').then((response) => self.todos = response.body);
+    getTodos: function () {
+        var self = this;
+        this.$http.get('/todos').then(
+            response => self.todos = response.body,
+            response => console.error(response.body),
+        );
     },
 
     addTodo: function () {
@@ -76,11 +79,13 @@ var app = new Vue({
       }
 
       var self = this;
-      this.$http.post('/todos', todo)
-        .then(function (response) {
-            todo = response.body;
-            self.todos.push(todo);
-        });
+      this.$http.post('/todos', todo).then(function (response)
+          {
+              todo = response.body;
+              self.todos.push(todo);
+          },
+          response => console.error(response.body),
+      );
       this.newTodo = ''
     },
 
@@ -92,8 +97,10 @@ var app = new Vue({
     },
 
     removeTodo: function (todo) {
-        this.$http.delete(`/todos?id=${todo.id}`)
-            .then((response) => this.todos.splice(this.todos.indexOf(todo), 1));
+        this.$http.delete(`/todos?id=${todo.id}`).then(
+            response => this.todos.splice(this.todos.indexOf(todo), 1),
+            response => console.error(response.body),
+        );
     },
 
     editTodo: function (todo) {
