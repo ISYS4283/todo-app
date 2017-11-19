@@ -28,18 +28,25 @@ class Repository
 
     public function update(array $todo) : bool
     {
-        $sql = 'UPDATE todos SET title = :title, completed = :completed WHERE id = :id';
+        $todo = $this->filter($todo, [
+            'title',
+            'completed',
+            'id',
+        ]);
 
-        $todo['completed'] = (int)$todo['completed'];
+        $sql = 'UPDATE todos SET title = :title, completed = :completed WHERE id = :id';
 
         return $this->db->prepare($sql)->execute($todo);
     }
 
     public function create(array $todo) : int
     {
-        $sql = 'INSERT INTO todos (title, completed) VALUES (:title, :completed)';
+        $todo = $this->filter($todo, [
+            'title',
+            'completed',
+        ]);
 
-        $todo['completed'] = (int)$todo['completed'];
+        $sql = 'INSERT INTO todos (title, completed) VALUES (:title, :completed)';
 
         if ($this->db->prepare($sql)->execute($todo)) {
             return (int)$this->db->lastInsertId();
@@ -62,6 +69,13 @@ class Repository
         $sql = sprintf($sql, $this->getArrayBindPlaceholders($ids));
 
         return $this->db->prepare($sql)->execute($ids);
+    }
+
+    protected function filter(array $todo, array $whitelist) : array
+    {
+        $todo['completed'] = (int)$todo['completed'];
+
+        return array_intersect_key($todo, array_flip($whitelist));
     }
 
     protected function getMissingIds(array $todos) : array
