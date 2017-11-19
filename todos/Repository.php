@@ -1,5 +1,9 @@
 <?php
 
+namespace ISYS4283\ToDo;
+
+use PDO;
+
 class Repository
 {
     protected $db;
