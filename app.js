@@ -89,7 +89,7 @@ var app = new Vue({
       this.newTodo = ''
     },
 
-    toggleCompleted: function (todo) {
+    updateTodo: function (todo) {
         this.$http.put(`/todos?id=${todo.id}`, todo).then(
             response => todo = response.body,
             response => console.error(response.body),
@@ -116,6 +116,8 @@ var app = new Vue({
       todo.title = todo.title.trim()
       if (!todo.title) {
         this.removeTodo(todo)
+      } else {
+        this.updateTodo(todo)
       }
     },
 
