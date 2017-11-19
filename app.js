@@ -127,7 +127,7 @@ var app = new Vue({
     },
 
     removeCompleted: function () {
-      this.todos = filters.active(this.todos)
+      filters.completed(this.todos).forEach(todo => this.removeTodo(todo))
     }
   },
 
