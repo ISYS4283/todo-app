@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 require __DIR__.'/Repository.php';
 require __DIR__.'/Controller.php';
-$db = require __DIR__.'/../pdo.php';
+$db = require __DIR__.'/../../pdo.php';
 
 try {
     echo (new Controller(new Repository($db)))->sendResponse();
