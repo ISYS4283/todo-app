@@ -13,6 +13,20 @@ class Repository
         $this->db = $db;
     }
 
+    public function create(array $todo) : int
+    {
+        $todo = $this->filter($todo, [
+            'title',
+            'completed',
+        ]);
+
+        $sql = 'INSERT INTO todos (title, completed) VALUES (:title, :completed)';
+
+        if ($this->db->prepare($sql)->execute($todo)) {
+            return (int)$this->db->lastInsertId();
+        }
+    }
+
     public function get() : array
     {
         $sql = 'SELECT * FROM todos';
@@ -37,20 +51,6 @@ class Repository
         $sql = 'UPDATE todos SET title = :title, completed = :completed WHERE id = :id';
 
         return $this->db->prepare($sql)->execute($todo);
-    }
-
-    public function create(array $todo) : int
-    {
-        $todo = $this->filter($todo, [
-            'title',
-            'completed',
-        ]);
-
-        $sql = 'INSERT INTO todos (title, completed) VALUES (:title, :completed)';
-
-        if ($this->db->prepare($sql)->execute($todo)) {
-            return (int)$this->db->lastInsertId();
-        }
     }
 
     public function delete(int $id) : bool
