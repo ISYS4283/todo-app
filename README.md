@@ -147,7 +147,7 @@ Execute the [data definition language][ddl] for the application.
 Provision a user account on the server using [`CREATE USER` syntax][create-user].
 
 ```sql
-CREATE USER 'jeff'@'localhost' IDENTIFIED BY 'ty[VN26Zd~FmSEmPQX{PY^3d^01~qUS6';
+CREATE USER jeff IDENTIFIED BY 'ISYS4283 is the best!';
 ```
 
 ### Grant Permissions
@@ -156,11 +156,11 @@ Authorize access using [`GRANT` syntax][grant-syntax]
 following the [principle of least privilege][least-privilege-principle].
 
 ```sql
-GRANT SELECT ON todoapp.view_todos TO 'jeff'@'localhost';
-GRANT SELECT (id) ON todoapp.todos TO 'jeff'@'localhost';
-GRANT INSERT ON todoapp.todos TO 'jeff'@'localhost';
-GRANT UPDATE ON todoapp.todos TO 'jeff'@'localhost';
-GRANT DELETE ON todoapp.todos TO 'jeff'@'localhost';
+GRANT SELECT ON todoapp.view_todos TO jeff;
+GRANT SELECT (id) ON todoapp.todos TO jeff;
+GRANT INSERT ON todoapp.todos TO jeff;
+GRANT UPDATE ON todoapp.todos TO jeff;
+GRANT DELETE ON todoapp.todos TO jeff;
 ```
 
 If you would like to create an administrative user,
