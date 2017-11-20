@@ -117,5 +117,6 @@ class Controller
     protected function sendAuthenticationPrompt()
     {
         http_response_code(401);
+        return '<a href="login.php">Login</a>';
     }
 }
