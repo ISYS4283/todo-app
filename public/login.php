@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   placeholder="username">
 
                 <label for="password" class="input-label">password</label>
-                <input id="password" name="password" class="new-todo"
+                <input id="password" name="password" type="password" class="new-todo"
                   autofocus autocomplete="off"
                   placeholder="password">
 
