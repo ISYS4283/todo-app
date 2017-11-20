@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             .flex-wrapper button {
                 padding: 25px;
+                margin: 10px;
                 border: 1px outset #f5f5f5;
                 background-color: rgba(175, 47, 47, 0.15);
             }
