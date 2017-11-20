@@ -13,6 +13,19 @@ class Repository
         $this->db = $db;
     }
 
+    public static function connectMySql(string $username, string $password, string $database, string $hostname = 'localhost') : Repository
+    {
+        $pdo = new PDO("mysql:host=$hostname;
+            charset=UTF8;
+            dbname=$database",
+            $username,
+            $password
+        );
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        return new static($pdo);
+    }
+
     public function create(array $todo) : int
     {
         $todo = $this->filter($todo, [

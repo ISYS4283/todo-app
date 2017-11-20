@@ -62,7 +62,7 @@ var app = new Vue({
   methods: {
     getTodos: function () {
         var self = this;
-        this.$http.get('/todos').then(
+        this.$http.get('/todos.php').then(
             response => self.todos = response.body,
             response => console.error(response.body),
         );
@@ -79,7 +79,7 @@ var app = new Vue({
       }
 
       var self = this;
-      this.$http.post('/todos', todo).then(function (response)
+      this.$http.post('/todos.php', todo).then(function (response)
           {
               todo = response.body;
               self.todos.push(todo);
@@ -90,14 +90,14 @@ var app = new Vue({
     },
 
     updateTodo: function (todo) {
-        this.$http.put(`/todos?id=${todo.id}`, todo).then(
+        this.$http.put(`/todos.php?id=${todo.id}`, todo).then(
             response => todo = response.body,
             response => console.error(response.body),
         );
     },
 
     removeTodo: function (todo) {
-        this.$http.delete(`/todos?id=${todo.id}`).then(
+        this.$http.delete(`/todos.php?id=${todo.id}`).then(
             response => this.todos.splice(this.todos.indexOf(todo), 1),
             response => console.error(response.body),
         );

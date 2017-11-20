@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+if (empty($_SESSION['credentials'])) {
+    header('Location: /login.php');
+    die();
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,9 +14,25 @@
         <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css@2.0.6/index.css">
         <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
-        <style>[v-cloak] { display: none; }</style>
+        <style>
+            [v-cloak] { display: none; }
+            nav a {
+                position: absolute;
+                top: 0px;
+                right: 10%;
+                text-decoration: none;
+                color: inherit;
+                padding: 10px;
+            }
+            nav a:hover {
+                text-decoration: underline;
+            }
+        </style>
     </head>
     <body>
+        <nav>
+            <a href="/login.php">Logout</a>
+        </nav>
         <section class="todoapp">
           <header class="header">
             <h1>todos</h1>

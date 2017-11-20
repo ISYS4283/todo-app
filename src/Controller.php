@@ -6,13 +6,25 @@ class Controller
 {
     protected $repository;
 
-    public function __construct(Repository $repository)
+    public function __construct(Repository $repository = null)
     {
-        $this->repository = $repository;
+        if (isset($repository)) {
+            $this->repository = $repository;
+        }
     }
 
     public function sendResponse()
     {
+        if (empty($this->repository)) {
+            try {
+                $credentials = array_values($this->authenticate()->getCredentials());
+            } catch (MissingParameter $e) {
+                return $this->sendAuthenticationPrompt();
+            }
+
+            $this->repository = Repository::connectMySql(...$credentials);
+        }
+
         $method = $_SERVER['REQUEST_METHOD'];
         return $this->$method();
     }
@@ -57,6 +69,19 @@ class Controller
         }
     }
 
+    protected function authenticate() : Authenticator
+    {
+        try {
+            return Authenticator::createFromTokenHeader();
+        } catch (MissingToken $e) {}
+
+        try {
+            return Authenticator::createFromSession();
+        } catch (MissingSessionCredentials $e) {}
+
+        return Authenticator::createFromFormRequest();
+    }
+
     protected function getId()
     {
         if (empty($_GET['id'])) {
@@ -87,5 +112,10 @@ class Controller
     protected function sendSuccessNoContent()
     {
         http_response_code(204);
+    }
+
+    protected function sendAuthenticationPrompt()
+    {
+        http_response_code(401);
     }
 }
