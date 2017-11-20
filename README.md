@@ -100,6 +100,8 @@ than a long string of lowercase letters.
 
 [![xkcd cartoon on password strength][password-strength]][password-strength-xkcd]
 
+Passwords are out! Passphrases are in!
+
 *Note* one caveat with MySQL Replication limits password lengths to a
 [maximum of 32 characters][password-max].
 
