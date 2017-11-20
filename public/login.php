@@ -15,8 +15,15 @@ require __DIR__.'/../src/Repository.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // get post data
     $authenticator = Authenticator::createFromFormRequest();
+
     // verify login
     Repository::connectMySql(...array_values($authenticator->getCredentials()));
+
+    // give token
+    if (isset($_POST['token'])) {
+        die($authenticator->getToken());
+    }
+
     // save and redirect to app
     $authenticator->saveToSession();
     header('Location: /');
