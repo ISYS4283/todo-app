@@ -42,7 +42,7 @@ class Repository
 
     public function get() : array
     {
-        $sql = 'SELECT * FROM todos';
+        $sql = 'SELECT * FROM view_todos';
 
         $todos = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 

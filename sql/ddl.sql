@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS view_todos;
 DROP TABLE IF EXISTS todos;
 
 CREATE TABLE todos
@@ -7,6 +8,11 @@ CREATE TABLE todos
     title VARCHAR(255) NOT NULL,
     completed BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+CREATE SQL SECURITY DEFINER VIEW view_todos AS
+SELECT *
+FROM todos
+WHERE username = USER();
 
 DELIMITER $$
 CREATE TRIGGER trigger_todos_insert BEFORE INSERT ON todos FOR EACH ROW
