@@ -31,6 +31,10 @@ class Controller
 
     protected function get() : string
     {
+        if (isset($_GET['all'])) {
+            return $this->sendJson($this->repository->getAll());
+        }
+
         return $this->sendJson($this->repository->get());
     }
 

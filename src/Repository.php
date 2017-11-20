@@ -40,10 +40,18 @@ class Repository
         }
     }
 
+    public function getAll() : array
+    {
+        return $this->query('SELECT * FROM todos');
+    }
+
     public function get() : array
     {
-        $sql = 'SELECT * FROM view_todos';
+        return $this->query('SELECT * FROM view_todos');
+    }
 
+    protected function query(string $sql) : array
+    {
         $todos = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($todos as &$todo) {
