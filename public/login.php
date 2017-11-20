@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Login</title>
+        <title>Login TODO</title>
         <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css@2.0.6/index.css">
         <style>
             [v-cloak] { display: none; }
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <body>
         <section class="todoapp">
           <header class="header">
-            <h1>Login</h1>
+            <h1>login</h1>
             <form method="post">
                 <label for="username" class="input-label">username</label>
                 <input id="username" name="username" class="new-todo"
