@@ -11,6 +11,7 @@ This is also commonly referred to as the [LAMP stack][lamp].
 ## Table of Contents
 
 1. [Provision Open Stack Server Virtual Hardware (Linux on Nebula)](#provision-virtual-machine)
+    1. [Connect to Server via SSH (Putty)](#ssh-with-putty)
 1. [Install Web Server (Apache)]
 1. [Install Database Management System Software (MySQL)](#install-mysql)
     1. [Harden Security](#harden-security)
@@ -82,6 +83,24 @@ we need to associate a LAN IP address.
 At last, verify that the server is running on the 10.0.0.0/8 network.
 
 ![screenshot](./docs/images/nebula-launch-instance-9-finish.png)
+
+### SSH with Putty
+
+[Download][putty] and install putty.
+
+Start `PuTTYgen`
+
+Load the `todoserver.pem` file we generated and downloaded from nebula.
+
+![screenshot](./docs/images/putty-gen-1.png)
+
+Now we need to convert the `pem` file to a usable `ppk` format for putty.
+
+![screenshot](./docs/images/putty-gen-2.png)
+
+Save it as `todoserver.ppk` somewhere safe, such as Desktop or S:\ drive.
+
+![screenshot](./docs/images/putty-gen-3.png)
 
 ## Install MySQL
 
@@ -256,6 +275,7 @@ GRANT ALL PRIVILEGES ON todoapp.* TO 'adminuser'@'localhost';
 [nebula-account-request]:https://help.uark.edu/CherwellPortal/ITHelpPortal/Command/OneStep.LaunchOneStep?Name=Nebula%20Request
 [ssh]:https://en.wikipedia.org/wiki/Secure_Shell
 [pki]:https://en.wikipedia.org/wiki/Public_key_infrastructure
+[putty]:https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.70-installer.msi
 [your-password-is-too-damn-short]:https://blog.codinghorror.com/your-password-is-too-damn-short/
 [password-validate-options]:https://dev.mysql.com/doc/refman/5.7/en/validate-password-options-variables.html
 [password-strength]:./docs/images/password-strength.png
