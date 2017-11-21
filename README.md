@@ -10,7 +10,7 @@ This is also commonly referred to as the [LAMP stack][lamp].
 
 ## Table of Contents
 
-1. [Provision Open Stack Server Virtual Hardware (Linux on Nebula)]
+1. [Provision Open Stack Server Virtual Hardware (Linux on Nebula)](#provision-virtual-machine)
 1. [Install Web Server (Apache)]
 1. [Install Database Management System Software (MySQL)](#install-mysql)
     1. [Harden Security](#harden-security)
@@ -21,6 +21,20 @@ This is also commonly referred to as the [LAMP stack][lamp].
         1. [Authorize User Accounts](#grant-permissions)
 1. [Install PHP]
     1. [Deploy Application Web Service]
+
+## Provision Virtual Machine
+
+You will need access to a private server.
+The University IT Services provides this at no cost for students.
+
+Login: https://nebula.uark.edu
+
+![login screenshot](./docs/images/nebula-login.png)
+
+> **If your password doesn't work,**
+> then you will need to request access [here][nebula-account-request].
+> Fill out the form with all the defaults to request a nebula account,
+> and then wait until they respond creating your account.
 
 ## Install MySQL
 
@@ -192,6 +206,7 @@ GRANT ALL PRIVILEGES ON todoapp.* TO 'adminuser'@'localhost';
 
 [vue-todo]:https://vuejs.org/v2/examples/todomvc.html
 [lamp]:https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29
+[nebula-account-request]:https://help.uark.edu/CherwellPortal/ITHelpPortal/Command/OneStep.LaunchOneStep?Name=Nebula%20Request
 [your-password-is-too-damn-short]:https://blog.codinghorror.com/your-password-is-too-damn-short/
 [password-validate-options]:https://dev.mysql.com/doc/refman/5.7/en/validate-password-options-variables.html
 [password-strength]:./docs/images/password-strength.png
