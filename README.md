@@ -20,8 +20,8 @@ This is also commonly referred to as the [LAMP stack][lamp].
         1. [Execute DDL](#define-schema)
         1. [Provision User Accounts](#create-users)
         1. [Authorize User Accounts](#grant-permissions)
-1. [Install PHP]
-    1. [Deploy Application Web Service]
+1. [Install PHP](#install-php)
+    1. [Deploy Application Web Service](#deploy-app)
 
 ## Provision Virtual Machine
 
@@ -317,6 +317,28 @@ then `GRANT ALL PRIVILEGES` with an asterisk wildcard for entities.
 ```sql
 GRANT ALL PRIVILEGES ON todoapp.* TO 'adminuser'@'localhost';
 ```
+
+## Install PHP
+
+Install php, Apache interpreter, and MySQL drivers with multibyte support.
+
+    sudo apt install -y php libapache2-mod-php php-mysql php-mbstring
+
+Edit virtual host configuration and set document root to project public folder.
+
+    sudo vim /etc/apache2/sites-available/000-default.conf
+
+Change this line:
+
+    DocumentRoot /var/www/html
+
+to this line:
+
+    DocumentRoot /var/www/todo-app/public
+
+Restart the web server.
+
+    sudo service apache2 restart
 
 [vue-todo]:https://vuejs.org/v2/examples/todomvc.html
 [lamp]:https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29
