@@ -36,6 +36,10 @@ Login: https://nebula.uark.edu
 > Fill out the form with all the defaults to request a nebula account,
 > and then wait until they respond creating your account.
 
+Click on <kbd>Launch Instance</kbd>
+
+![launch an instance screenshot](./docs/images/nebula-launch-instance.png)
+
 ## Install MySQL
 
     sudo apt install -y mysql-server
