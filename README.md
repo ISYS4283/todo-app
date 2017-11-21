@@ -87,10 +87,10 @@ You will be presented with a series of questions.
 >
 > Please enter level of password validation policy.
 
-    2
-
 A minimum password length of 8 characters [is not good enough][your-password-is-too-damn-short],
 but don't worry right now because we'll fix this later.
+
+    2
 
 > Change the password for root?
 
