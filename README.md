@@ -12,7 +12,7 @@ This is also commonly referred to as the [LAMP stack][lamp].
 
 1. [Provision Open Stack Server Virtual Hardware (Linux on Nebula)](#provision-virtual-machine)
     1. [Connect to Server via SSH (Putty)](#ssh-with-putty)
-1. [Install Web Server (Apache)]
+1. [Install Web Server (Apache)](#install-apache)
 1. [Install Database Management System Software (MySQL)](#install-mysql)
     1. [Harden Security](#harden-security)
     1. [Deploy Application Physical Schema](#deploy-application-physical-schema)
@@ -117,6 +117,24 @@ Visit `Connection` > `SSH` > `Auth` and <kbd>Browse</kbd> to `todoserver.ppk`
 Click <kbd>Open</kbd> and in your most hacker voice, say "I'm in"
 
 ![screenshot](./docs/images/putty-3.png)
+
+## Install Apache
+
+First we want to update the software repositories for the package manager `apt`
+
+    sudo apt update
+
+Then we want to upgrade existing software get the latest patches.
+
+    sudo apt upgrade -y
+
+Next let's install the web server.
+
+    sudo apt install -y apache2
+
+Now open your browser in VMWare and goto your server IP address.
+
+![screenshot](./docs/images/apache.png)
 
 ## Install MySQL
 
