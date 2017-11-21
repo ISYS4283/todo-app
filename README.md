@@ -22,6 +22,7 @@ This is also commonly referred to as the [LAMP stack][lamp].
         1. [Authorize User Accounts](#grant-permissions)
 1. [Install PHP](#install-php)
     1. [Deploy Application Web Service](#deploy-app)
+    1. [Install DBMS interface (phpmyadmin)](#install-phpmyadmin)
 
 ## Provision Virtual Machine
 
@@ -132,7 +133,7 @@ Next let's install the web server.
 
     sudo apt install -y apache2
 
-Now open your browser in VMWare and goto your server IP address.
+Now open your browser (firefox/chrome) in VMWare and goto your server IP address.
 
 ![screenshot](./docs/images/apache.png)
 
@@ -324,6 +325,8 @@ Install php, Apache interpreter, and MySQL drivers with multibyte support.
 
     sudo apt install -y php libapache2-mod-php php-mysql php-mbstring
 
+### Deploy App
+
 Edit virtual host configuration and set document root to project public folder.
 
     sudo vim /etc/apache2/sites-available/000-default.conf
@@ -339,6 +342,24 @@ to this line:
 Restart the web server.
 
     sudo service apache2 restart
+
+Browse to the website in firefox or chrome now to use the ToDo app.
+
+![screenshot](./docs/images/todo-app.png)
+
+### Install PHPMyAdmin
+
+For administrators and power users, provide a more robust interface for MySQL.
+
+    sudo apt install -y phpmyadmin
+
+Push the <kbd>Space</kbd> bar to select `apache2` for auto-configuration.
+
+Select the defaults for the remaining options.
+
+Browse to your server IP address's `http://10.9.0.198/phpmyadmin/`
+
+![screenshot](./docs/images/phpmyadmin.png)
 
 [vue-todo]:https://vuejs.org/v2/examples/todomvc.html
 [lamp]:https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29
