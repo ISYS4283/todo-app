@@ -6,6 +6,22 @@ This is a basic to-do list implemented with an N-tier architecture.
 * PHP backend API
 * Javascript frontend ([Vue JS][vue-todo])
 
+This is also commonly referred to as the [LAMP stack][lamp].
+
+## Table of Contents
+
+1. [Provision Open Stack Server Virtual Hardware (Linux on Nebula)]
+1. [Install Web Server (Apache)]
+1. [Install Database Management System Software (MySQL)](#install-mysql)
+    1. [Harden Security](#harden-security)
+    1. [Deploy Application Physical Schema](#deploy-application-physical-schema)
+        1. [Create Database](#create-database)
+        1. [Execute DDL](#define-schema)
+        1. [Provision User Accounts](#create-users)
+        1. [Authorize User Accounts](#grant-permissions)
+1. [Install PHP]
+    1. [Deploy Application Web Service]
+
 ## Install MySQL
 
     sudo apt install -y mysql-server
@@ -128,7 +144,9 @@ Restart the daemon to load your changes.
 
     sudo service mysql restart
 
-## Create Database
+### Deploy Application Physical Schema
+
+#### Create Database
 
 Provision a database on the server using [`CREATE DATABASE` syntax][create-database].
 
@@ -138,13 +156,13 @@ CREATE DATABASE todoapp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;
 
 See also: [choosing a collation][choosing-collation].
 
-### Define Schema
+#### Define Schema
 
 Execute the [data definition language][ddl] for the application.
 
     mysql -u root -p todoapp < sql/ddl.sql
 
-## Create Users
+#### Create Users
 
 Provision a user account on the server using [`CREATE USER` syntax][create-user].
 
@@ -152,7 +170,7 @@ Provision a user account on the server using [`CREATE USER` syntax][create-user]
 CREATE USER jeff IDENTIFIED BY 'ISYS4283 is the best!';
 ```
 
-### Grant Permissions
+#### Grant Permissions
 
 Authorize access using [`GRANT` syntax][grant-syntax]
 following the [principle of least privilege][least-privilege-principle].
@@ -173,6 +191,7 @@ GRANT ALL PRIVILEGES ON todoapp.* TO 'adminuser'@'localhost';
 ```
 
 [vue-todo]:https://vuejs.org/v2/examples/todomvc.html
+[lamp]:https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29
 [your-password-is-too-damn-short]:https://blog.codinghorror.com/your-password-is-too-damn-short/
 [password-validate-options]:https://dev.mysql.com/doc/refman/5.7/en/validate-password-options-variables.html
 [password-strength]:./docs/images/password-strength.png
