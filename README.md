@@ -102,6 +102,22 @@ Save it as `todoserver.ppk` somewhere safe, such as Desktop or S:\ drive.
 
 ![screenshot](./docs/images/putty-gen-3.png)
 
+Start `Putty`
+
+Enter `ubuntu@10.9.0.xxx` (`ubuntu` at your server floating IP) for Host Name.
+
+Save the session as `todoserver`
+
+![screenshot](./docs/images/putty-1.png)
+
+Visit `Connection` > `SSH` > `Auth` and <kbd>Browse</kbd> to `todoserver.ppk`
+
+![screenshot](./docs/images/putty-2.png)
+
+Click <kbd>Open</kbd> and in your most hacker voice, say "I'm in"
+
+![screenshot](./docs/images/putty-3.png)
+
 ## Install MySQL
 
     sudo apt install -y mysql-server
