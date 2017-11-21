@@ -40,6 +40,25 @@ Click on <kbd>Launch Instance</kbd>
 
 ![launch an instance screenshot](./docs/images/nebula-launch-instance.png)
 
+![alt](./docs/images/nebula-launch-instance-1-details.png)
+
+![alt](./docs/images/nebula-launch-instance-2-source.png)
+
+![alt](./docs/images/nebula-launch-instance-3-source-image.png)
+
+![alt](./docs/images/nebula-launch-instance-4-flavor.png)
+
+![alt](./docs/images/nebula-launch-instance-5-key-pair.png)
+
+![alt](./docs/images/nebula-launch-instance-6-key-pair-name.png)
+
+![alt](./docs/images/nebula-launch-instance-7-launch.png)
+
+![alt](./docs/images/nebula-launch-instance-8-associate-ip.png)
+
+![alt](./docs/images/nebula-launch-instance-9-finish.png)
+
+
 ## Install MySQL
 
     sudo apt install -y mysql-server
