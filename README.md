@@ -260,7 +260,21 @@ Restart the daemon to load your changes.
 
 ### Deploy Application Physical Schema
 
+Change directory into the web folder.
+
+    cd /var/www
+
+Clone this project as root.
+
+    sudo git clone https://github.com/ISYS4283/todo-app.git
+
+Change directory into the project folder.
+
+    cd todo-app
+
 #### Create Database
+
+The following commands should be executed from the mysql console client.
 
 Provision a database on the server using [`CREATE DATABASE` syntax][create-database].
 
