@@ -40,24 +40,48 @@ Click on <kbd>Launch Instance</kbd>
 
 ![launch an instance screenshot](./docs/images/nebula-launch-instance.png)
 
-![alt](./docs/images/nebula-launch-instance-1-details.png)
+Click on <kbd>Details</kbd> and name the server `todoserver`
 
-![alt](./docs/images/nebula-launch-instance-2-source.png)
+![screenshot](./docs/images/nebula-launch-instance-1-details.png)
 
-![alt](./docs/images/nebula-launch-instance-3-source-image.png)
+Click on <kbd>Source</kbd> and choose `Image` from `Select Boot Source`
 
-![alt](./docs/images/nebula-launch-instance-4-flavor.png)
+![screenshot](./docs/images/nebula-launch-instance-2-source.png)
 
-![alt](./docs/images/nebula-launch-instance-5-key-pair.png)
+Choose the `Ubuntu16.04-LTS` image by clicking the respective <kbd>+</kbd>
 
-![alt](./docs/images/nebula-launch-instance-6-key-pair-name.png)
+![screenshot](./docs/images/nebula-launch-instance-3-source-image.png)
 
-![alt](./docs/images/nebula-launch-instance-7-launch.png)
+Click <kbd>Flavor</kbd> and choose the `m1.tiny`
 
-![alt](./docs/images/nebula-launch-instance-8-associate-ip.png)
+![screenshot](./docs/images/nebula-launch-instance-4-flavor.png)
 
-![alt](./docs/images/nebula-launch-instance-9-finish.png)
+We will need a way to login to the server.
+This is accomplished through [SSH][ssh] and [public-private key pair cryptography][pki].
+It's like creating a cryptographic lock on the server to which we have a key.
 
+Click <kbd>Key Pair</kbd> and then <kbd>+ Create Key Pair</kbd>
+
+![screenshot](./docs/images/nebula-launch-instance-5-key-pair.png)
+
+Name it `todoserver` and click <kbd>Create Keypair</kbd>
+
+![screenshot](./docs/images/nebula-launch-instance-6-key-pair-name.png)
+
+Finally, click <kbd>Launch Instance</kbd>
+
+![screenshot](./docs/images/nebula-launch-instance-7-launch.png)
+
+In order to make the server accessible to our network,
+we need to associate a LAN IP address.
+
+![screenshot](./docs/images/nebula-launch-instance-8-associate-ip.png)
+
+![screenshot](./docs/images/nebula-launch-instance-8-associate-ip-2.png)
+
+At last, verify that the server is running on the 10.0.0.0/8 network.
+
+![screenshot](./docs/images/nebula-launch-instance-9-finish.png)
 
 ## Install MySQL
 
@@ -230,6 +254,8 @@ GRANT ALL PRIVILEGES ON todoapp.* TO 'adminuser'@'localhost';
 [vue-todo]:https://vuejs.org/v2/examples/todomvc.html
 [lamp]:https://en.wikipedia.org/wiki/LAMP_%28software_bundle%29
 [nebula-account-request]:https://help.uark.edu/CherwellPortal/ITHelpPortal/Command/OneStep.LaunchOneStep?Name=Nebula%20Request
+[ssh]:https://en.wikipedia.org/wiki/Secure_Shell
+[pki]:https://en.wikipedia.org/wiki/Public_key_infrastructure
 [your-password-is-too-damn-short]:https://blog.codinghorror.com/your-password-is-too-damn-short/
 [password-validate-options]:https://dev.mysql.com/doc/refman/5.7/en/validate-password-options-variables.html
 [password-strength]:./docs/images/password-strength.png
