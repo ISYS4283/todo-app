@@ -9,6 +9,11 @@ use App\ToDo;
 
 class GraderTest extends TestCase
 {
+    public function url() : string
+    {
+        return 'http://localhost:' . getenv('TEST_SERVER_PORT');
+    }
+
     public function user()
     {
         return Zttp::withHeaders([
@@ -34,11 +39,6 @@ class GraderTest extends TestCase
     public function userDelete(array $todo) : bool
     {
         return $this->user()->delete("{$this->url()}?id=$todo[id]")->status() == 204;
-    }
-
-    public function url() : string
-    {
-        return 'http://localhost:' . getenv('TEST_SERVER_PORT');
     }
 
     public function test_can_connect_to_server()
