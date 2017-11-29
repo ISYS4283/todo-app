@@ -22,6 +22,12 @@
             <directory suffix=".php">./app</directory>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-html" target="./tests/coverage"
+            lowUpperBound="35"   highLowerBound="90"/>
+        <log type="coverage-text" target="php://stdout"
+            showUncoveredFiles="false"/>
+    </logging>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>
