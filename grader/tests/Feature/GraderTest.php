@@ -16,17 +16,17 @@ class GraderTest extends TestCase
         ]);
     }
 
-    public function userGet(array $data = [])
+    public function userGet(array $data = []) : array
     {
         return $this->user()->get($this->url(), $data)->json();
     }
 
-    public function userPut(array $todo)
+    public function userPut(array $todo) : array
     {
         return $this->user()->put("{$this->url()}?id=$todo[id]", $todo)->json();
     }
 
-    public function userPost(array $data)
+    public function userPost(array $data) : array
     {
         return $this->user()->post($this->url(), $data)->json();
     }
@@ -36,7 +36,7 @@ class GraderTest extends TestCase
         return $this->user()->delete("{$this->url()}?id=$todo[id]")->status() == 204;
     }
 
-    public function url()
+    public function url() : string
     {
         return 'http://localhost:' . getenv('TEST_SERVER_PORT');
     }
