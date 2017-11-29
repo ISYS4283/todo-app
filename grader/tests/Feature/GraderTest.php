@@ -26,6 +26,11 @@ class GraderTest extends TestCase
         return $this->user()->post($this->url(), $data)->json();
     }
 
+    public function userDelete(array $todo) : bool
+    {
+        return $this->user()->delete("{$this->url()}?id=$todo[id]")->status() == 204;
+    }
+
     public function url()
     {
         return 'http://localhost:' . getenv('TEST_SERVER_PORT');
@@ -44,5 +49,15 @@ class GraderTest extends TestCase
 
         $this->assertArraySubset($expected, $actual);
         $this->assertArrayHasKey('id', $actual);
+
+        return $actual;
+    }
+
+    /**
+     * @depends test_user_can_create_todo
+     */
+    public function test_user_can_delete_todo(array $todo)
+    {
+        $this->assertTrue($this->userDelete($todo));
     }
 }
