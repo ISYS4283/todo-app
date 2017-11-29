@@ -21,6 +21,11 @@ class GraderTest extends TestCase
         return $this->user()->get($this->url(), $data)->json();
     }
 
+    public function userPut(array $todo)
+    {
+        return $this->user()->put("{$this->url()}?id=$todo[id]", $todo)->json();
+    }
+
     public function userPost(array $data)
     {
         return $this->user()->post($this->url(), $data)->json();
@@ -55,6 +60,21 @@ class GraderTest extends TestCase
 
     /**
      * @depends test_user_can_create_todo
+     */
+    public function test_user_can_update_todo(array $todo)
+    {
+        $expected = factory(ToDo::class)->make()->toArray();
+        $expected['id'] = $todo['id'];
+
+        $actual = $this->userPut($expected);
+
+        $this->assertEquals($expected, $actual);
+
+        return $actual;
+    }
+
+    /**
+     * @depends test_user_can_update_todo
      */
     public function test_user_can_delete_todo(array $todo)
     {
