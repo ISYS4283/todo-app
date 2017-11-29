@@ -55,6 +55,11 @@ class Authenticator
             throw new MissingToken;
         }
 
+        return static::createFromToken($token);
+    }
+
+    public static function createFromToken(string $token) : Authenticator
+    {
         $json = base64_decode($token);
         if ($json === false) {
             throw new BadBase64Encoding;
