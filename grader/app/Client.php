@@ -29,6 +29,10 @@ class Client
 
     public function put(array $data)
     {
+        if (empty($data['id'])) {
+            throw new MissingID('An ID is required for a PUT operation.');
+        }
+
         return $this->send('PUT', $data['id'], $data);
     }
 
@@ -81,4 +85,5 @@ class Client
     }
 }
 
+class MissingID extends InvalidArgumentException {}
 class BadResponse extends Exception {}
