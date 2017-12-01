@@ -8,12 +8,12 @@ use Zttp\Zttp;
 
 class Client
 {
-    protected $ip;
+    protected $host;
     protected $token;
 
-    public function __construct(string $ip, string $token)
+    public function __construct(string $host, string $token)
     {
-        $this->setIp($ip);
+        $this->sethost($host);
         $this->token = $token;
     }
 
@@ -37,13 +37,13 @@ class Client
         return $this->send('DELETE', $id);
     }
 
-    protected function setIp(string $ip)
+    protected function sethost(string $host)
     {
-        if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            throw new InvalidIpAddress("Invalid IPv4: $ip");
+        if (filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            return $this->host = "http://$host";
         }
 
-        $this->ip = $ip;
+        return $this->host = $host;
     }
 
     protected function authenticate()
@@ -55,7 +55,7 @@ class Client
 
     protected function url($query = null) : string
     {
-        $url = "http://{$this->ip}/todos.php";
+        $url = "{$this->host}/todos.php";
 
         if (filter_var($query, FILTER_VALIDATE_INT)) {
             return "$url?id=$query";
@@ -81,5 +81,4 @@ class Client
     }
 }
 
-class InvalidIpAddress extends InvalidArgumentException {}
 class BadResponse extends Exception {}

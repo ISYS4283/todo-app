@@ -8,21 +8,11 @@ use App\Client;
 
 class ClientTest extends TestCase
 {
-    public function test_can_validate_ip()
+    public function test_can_instantiate_object()
     {
         $ip = "10.9.12.200";
         $token = "token";
 
         $this->assertInstanceOf(Client::class, new Client($ip, $token));
-    }
-
-    /**
-     * @expectedException \App\InvalidIpAddress
-     */
-    public function test_can_invalidate_ip()
-    {
-        $ip = "10.9.12.200.4";
-        $token = "token";
-        new Client($ip, $token);
     }
 }
