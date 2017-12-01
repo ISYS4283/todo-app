@@ -29,10 +29,21 @@
         in order to verify functionality and correct permissions applied.
     </p>
 
-    {{ Form::open(['url' => '/']) }}
-        {{ Form::bsText('IP Address') }}
-        {{ Form::bsText('User Token') }}
-        {{ Form::bsText('Admin Token') }}
+    <form method="post">
+        {{ csrf_field() }}
+        <div class="form-group {{ $errors->has('ip-address') ? 'has-error' : '' }}">
+            <label for="IP Address" class="control-label">IP Address</label>
+            <input class="form-control"
+                   type="text"
+                   name="ip-address"
+                   required
+                   value="{{ old('ip-address') }}">
+            @if ($errors->has('ip-address'))
+                @foreach ($errors->get('ip-address') as $msg)
+                    <span class="label label-danger">{{ $msg }}</span>
+                @endforeach
+            @endif
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-    {{ Form::close() }}
+    </form>
 @endsection
