@@ -8,6 +8,5 @@ class GraderController extends Controller
 {
     public function grade(Assignment $request)
     {
-        dd($request);
     }
 }
