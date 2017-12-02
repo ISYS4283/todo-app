@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidHostname;
+use App\Rules\ParseableToken;
 
 class Assignment extends FormRequest
 {
@@ -26,6 +27,7 @@ class Assignment extends FormRequest
     {
         return [
             'ip-address' => ['required', new ValidHostname],
+            'user-token' => ['required', new ParseableToken],
         ];
     }
 }
