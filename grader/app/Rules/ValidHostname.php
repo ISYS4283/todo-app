@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Validator;
 
-class HostnameValidator implements Rule
+class ValidHostname implements Rule
 {
     protected $validator;
 

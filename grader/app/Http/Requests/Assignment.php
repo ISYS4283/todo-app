@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\HostnameValidator;
+use App\Rules\ValidHostname;
 
 class Assignment extends FormRequest
 {
@@ -25,7 +25,7 @@ class Assignment extends FormRequest
     public function rules()
     {
         return [
-            'ip-address' => ['required', new HostnameValidator],
+            'ip-address' => ['required', new ValidHostname],
         ];
     }
 }
