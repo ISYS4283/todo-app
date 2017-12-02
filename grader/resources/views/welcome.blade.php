@@ -37,6 +37,7 @@
                    type="text"
                    name="ip-address"
                    required
+                   autofocus
                    value="{{ old('ip-address') }}">
             @if ($errors->has('ip-address'))
                 @foreach ($errors->get('ip-address') as $msg)
