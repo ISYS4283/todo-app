@@ -31,8 +31,9 @@
 
     <form method="post">
         {{ csrf_field() }}
+
         <div class="form-group {{ $errors->has('ip-address') ? 'has-error' : '' }}">
-            <label for="IP Address" class="control-label">IP Address</label>
+            <label for="ip-address" class="control-label">IP Address</label>
             <input class="form-control"
                    type="text"
                    name="ip-address"
@@ -45,6 +46,21 @@
                 @endforeach
             @endif
         </div>
+
+        <div class="form-group {{ $errors->has('user-token') ? 'has-error' : '' }}">
+            <label for="user-token" class="control-label">User Token</label>
+            <input class="form-control"
+                   type="text"
+                   name="user-token"
+                   required
+                   value="{{ old('user-token') }}">
+            @if ($errors->has('user-token'))
+                @foreach ($errors->get('user-token') as $msg)
+                    <span class="label label-danger">{{ $msg }}</span>
+                @endforeach
+            @endif
+        </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
