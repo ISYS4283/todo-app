@@ -19,6 +19,12 @@ class StrongPassword implements Rule
         //
     }
 
+    protected function fail(string $error)
+    {
+        $this->message = $error;
+        return false;
+    }
+
     /**
      * Determine if the validation rule passes.
      *
@@ -31,28 +37,23 @@ class StrongPassword implements Rule
         $password = Authenticator::createFromToken($value)->getCredentials()['password'];
 
         if (strlen($password) < 13) {
-            $this->message = 'Your password is too short! Must be at least 13 characters.';
-            return false;
+            return $this->fail('Your password is too short! Must be at least 13 characters.');
         }
 
         if (strtolower($password) === $password) {
-            $this->message = 'Your password needs at least one uppercase letter.';
-            return false;
+            return $this->fail('Your password needs at least one uppercase letter.');
         }
 
         if (strtoupper($password) === $password) {
-            $this->message = 'Your password needs at least one lowercase letter.';
-            return false;
+            return $this->fail('Your password needs at least one lowercase letter.');
         }
 
         if (strcspn($password, '0123456789') === strlen($password)) {
-            $this->message = 'Your password needs at least one number.';
-            return false;
+            return $this->fail('Your password needs at least one number.');
         }
 
         if (ctype_alnum($password)) {
-            $this->message = 'Your password needs at least one special character.';
-            return false;
+            return $this->fail('Your password needs at least one special character.');
         }
 
         return true;
