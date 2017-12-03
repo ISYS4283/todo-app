@@ -40,17 +40,25 @@ class StrongPasswordTest extends TestCase
         $this->assertTrue($pass);
     }
 
-    public function test_too_short()
+    public function getFailureTestCases()
     {
-        $password = 'Too Short';
-        $expected = 'Your password is too short! Must be at least 13 characters.';
-        $this->assertSame($expected, $this->check($password));
+        return [
+            'too short' => [
+                'password' => 'Too Short 12',
+                'error' => 'Your password is too short! Must be at least 13 characters.',
+            ],
+            'no uppercase' => [
+                'password' => 'this 1 password has no uppercase letters',
+                'error' => 'Your password needs at least one uppercase letter.',
+            ],
+        ];
     }
 
-    public function test_uppercase()
+    /**
+     * @dataProvider getFailureTestCases
+     */
+    public function test_validates_password(string $password, string $error)
     {
-        $password = 'this 1 password has no uppercase letters';
-        $expected = 'Your password needs at least one uppercase letter.';
-        $this->assertSame($expected, $this->check($password));
+        $this->assertSame($error, $this->check($password));
     }
 }
