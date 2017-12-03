@@ -35,6 +35,11 @@ class StrongPassword implements Rule
             return false;
         }
 
+        if (strtolower($password) === $password) {
+            $this->message = 'Your password needs at least one uppercase letter.';
+            return false;
+        }
+
         return true;
     }
 
