@@ -50,6 +50,11 @@ class StrongPassword implements Rule
             return false;
         }
 
+        if (ctype_alnum($password)) {
+            $this->message = 'Your password needs at least one special character.';
+            return false;
+        }
+
         return true;
     }
 
