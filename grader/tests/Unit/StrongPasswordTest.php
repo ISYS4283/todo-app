@@ -55,6 +55,10 @@ class StrongPasswordTest extends TestCase
                 'password' => 'THIS 1 PASSWORD HAS NO LOWERCASE LETTERS',
                 'error' => 'Your password needs at least one lowercase letter.',
             ],
+            'no number' => [
+                'password' => 'This password has no numbers in it.',
+                'error' => 'Your password needs at least one number.',
+            ],
         ];
     }
 

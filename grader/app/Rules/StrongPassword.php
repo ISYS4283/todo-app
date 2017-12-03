@@ -45,6 +45,11 @@ class StrongPassword implements Rule
             return false;
         }
 
+        if (strcspn($password, '0123456789') === strlen($password)) {
+            $this->message = 'Your password needs at least one number.';
+            return false;
+        }
+
         return true;
     }
 
