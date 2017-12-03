@@ -46,4 +46,11 @@ class StrongPasswordTest extends TestCase
         $expected = 'Your password is too short! Must be at least 13 characters.';
         $this->assertSame($expected, $this->check($password));
     }
+
+    public function test_uppercase()
+    {
+        $password = 'this 1 password has no uppercase letters';
+        $expected = 'Your password needs at least one uppercase letter.';
+        $this->assertSame($expected, $this->check($password));
+    }
 }
