@@ -38,7 +38,9 @@ class Client
 
     public function delete(int $id)
     {
-        return $this->send('DELETE', $id);
+        $response = null;
+        $this->send('DELETE', $id, [], $response);
+        return $response->status() == 204;
     }
 
     protected function setHost(string $host)
@@ -73,7 +75,7 @@ class Client
         return $url;
     }
 
-    protected function send(string $method, $query = null, array $data = [])
+    protected function send(string $method, $query = null, array $data = [], &$response = null)
     {
         $response = $this->authenticate()->$method($this->url($query), $data);
 
