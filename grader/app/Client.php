@@ -13,7 +13,7 @@ class Client
 
     public function __construct(string $host, string $token)
     {
-        $this->sethost($host);
+        $this->setHost($host);
         $this->token = $token;
     }
 
@@ -41,13 +41,14 @@ class Client
         return $this->send('DELETE', $id);
     }
 
-    protected function sethost(string $host)
+    protected function setHost(string $host)
     {
         if (filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            return $this->host = "http://$host";
+            $this->host = "http://$host";
+            return;
         }
 
-        return $this->host = $host;
+        $this->host = $host;
     }
 
     protected function authenticate()
