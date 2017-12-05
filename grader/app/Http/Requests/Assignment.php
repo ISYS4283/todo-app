@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\ValidHostname;
 use App\Rules\ParseableToken;
+use App\Rules\StrongPassword;
 
 class Assignment extends FormRequest
 {
@@ -26,8 +27,8 @@ class Assignment extends FormRequest
     public function rules()
     {
         return [
-            'ip-address' => ['required', new ValidHostname],
-            'user-token' => ['required', new ParseableToken],
+            'ip-address' => ['bail', 'required', new ValidHostname],
+            'user-token' => ['bail', 'required', new ParseableToken, new StrongPassword],
         ];
     }
 }

@@ -31,7 +31,7 @@ class ParseableToken implements Rule
         try {
             $authenticator = Authenticator::createFromToken($value);
         } catch (\Throwable $e) {
-            $this->exceptionType = gettype($e);
+            $this->exceptionType = get_class($e);
             return false;
         }
 
