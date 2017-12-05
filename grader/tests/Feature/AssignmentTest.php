@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use ISYS4283\ToDo\Authenticator;
+use App\Client;
 
 class AssignmentTest extends TestCase
 {
@@ -18,6 +19,12 @@ class AssignmentTest extends TestCase
             'ip-address' => '10.10.10.10',
             'user-token' => 'eyJ1c2VybmFtZSI6ImZhY2VyZSIsInBhc3N3b3JkIjoiSVNZUzQyODMgaXMgdGhlIGJlc3QhIiwiZGF0YWJhc2UiOiJzb2x1dGEiLCJob3N0bmFtZSI6ImxvY2FsaG9zdCJ9',
         ], $override);
+    }
+
+    protected function getClient(string $token) : Client
+    {
+        $host = 'http://localhost:' . getenv('TEST_SERVER_PORT');
+        return new Client($host, $token);
     }
 
     public function test_creates_assignment()
@@ -87,5 +94,11 @@ class AssignmentTest extends TestCase
             ]))
             ->assertSuccessful()
         ;
+    }
+
+    public function test_user_can_connect_to_server()
+    {
+        $client = $this->getClient(getenv('REGULAR_USER_TOKEN'));
+        $this->assertTrue(is_array($client->get()));
     }
 }

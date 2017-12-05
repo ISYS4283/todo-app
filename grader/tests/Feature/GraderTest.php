@@ -41,11 +41,6 @@ class GraderTest extends TestCase
         return $this->user()->delete("{$this->url()}?id=$todo[id]")->status() == 204;
     }
 
-    public function test_can_connect_to_server()
-    {
-        $this->assertTrue(is_array($this->userGet()));
-    }
-
     public function test_user_can_create_todo()
     {
         $expected = factory(ToDo::class)->make()->toArray();
