@@ -4,23 +4,15 @@
     <h1>Welcome</h1>
 
     <p class="lead">
-        Follow the
+        Follow
             <a href="https://github.com/ISYS4283/todo-app"
                target='_blank' rel="noopener noreferrer">
-               tutorial
-           </a>
-        and then create:
+               this tutorial
+            </a>
     </p>
 
-    <ul>
-        <li>A new regular user.</li>
-        <li>A new administrative user, other than root.</li>
-    </ul>
-
     <p>
-        Then enter the IP address for your server,
-        and use the <kbd>Get Token</kbd> button on the todo app's login form
-        for the respective users.
+        Then use the <kbd>Get Token</kbd> button on the todo app's login form.
     </p>
 
     <p>
@@ -33,10 +25,11 @@
         {{ csrf_field() }}
 
         <div class="form-group {{ $errors->has('ip-address') ? 'has-error' : '' }}">
-            <label for="ip-address" class="control-label">IP Address</label>
+            <label for="ip-address" class="control-label">Server IP Address</label>
             <input class="form-control"
                    type="text"
                    name="ip-address"
+                   placeholder="for example: 10.9.0.198"
                    required
                    autofocus
                    value="{{ old('ip-address') }}">
@@ -52,6 +45,7 @@
             <input class="form-control"
                    type="text"
                    name="user-token"
+                   placeholder="for example: eyJ1c2VybmFtZSI6ImplZmYiLCJwYXNzd29yZCI6IklTWVM0MjgzIGlzIHRoZSBiZXN0ISIsImRhdGFiYXNlIjoidG9kb2FwcCIsImhvc3RuYW1lIjoibG9jYWxob3N0In0="
                    required
                    value="{{ old('user-token') }}">
             @if ($errors->has('user-token'))
