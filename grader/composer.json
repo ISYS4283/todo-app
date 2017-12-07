@@ -10,6 +10,7 @@
         "kitetail/zttp": "^0.3.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "razorbacks/laravel-shibboleth": "^3.0",
         "razorbacks/style": "^1.2"
     },
     "require-dev": {
