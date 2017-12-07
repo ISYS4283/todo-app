@@ -46,8 +46,7 @@ class Client
     protected function setHost(string $host)
     {
         if (filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $this->host = "http://$host";
-            return;
+            $host = "http://$host";
         }
 
         $this->host = $host;
