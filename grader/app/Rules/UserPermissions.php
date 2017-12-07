@@ -29,6 +29,7 @@ class UserPermissions implements Rule
         $assertions = [
             'create',
             'read',
+            'update',
         ];
 
         foreach ($assertions as $assertion) {
@@ -95,6 +96,22 @@ class UserPermissions implements Rule
 
         if (!is_array($response)) {
             throw new Failure('Cannot read data.');
+        }
+    }
+
+    protected function assertUpdate()
+    {
+        $expected = factory(ToDo::class)->make()->toArray();
+        $expected['id'] = $this->id;
+
+        $actual = $this->client->put($expected);
+
+        if (!is_array($actual)) {
+            throw new Failure('Cannot update data. Response is not an array.');
+        }
+
+        if (!empty(array_diff_assoc($expected, $actual))) {
+            throw new Failure('Cannot update data. Actual does not match expected.');
         }
     }
 }
