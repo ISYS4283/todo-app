@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\RequestException;
 class UserPermissions implements Rule
 {
     protected $message;
+    protected $client;
 
     protected function fail($e) : bool
     {
@@ -32,21 +33,35 @@ class UserPermissions implements Rule
      */
     public function passes($attribute, $value)
     {
-        $client = new Client(request()->get('ip-address'), $value);
+        $this->client = new Client(request()->get('ip-address'), $value);
 
-        try {
-            $response = $client->get();
-        } catch (BadResponse $e) {
-            return $this->fail($e);
-        } catch (RequestException $e) {
-            return $this->fail($e);
-        }
+        $assertions = [
+            'read',
+        ];
 
-        if (!is_array($response)) {
-            return $this->fail('Response did not return array.');
+        foreach ($assertions as $assertion) {
+            try {
+                $method = "assert$assertion";
+                $this->$method();
+            } catch (BadResponse $e) {
+                return $this->fail($e);
+            } catch (RequestException $e) {
+                return $this->fail($e);
+            } catch (Failure $e) {
+                return $this->fail($e);
+            }
         }
 
         return true;
+    }
+
+    protected function assertRead()
+    {
+        $response = $this->client->get();
+
+        if (!is_array($response)) {
+            throw new Failure('Cannot read data.');
+        }
     }
 
     /**
@@ -59,3 +74,5 @@ class UserPermissions implements Rule
         return $this->message;
     }
 }
+
+class Failure extends Exception {}
