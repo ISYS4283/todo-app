@@ -13,17 +13,6 @@ class UserPermissions implements Rule
     protected $message;
     protected $client;
 
-    protected function fail($e) : bool
-    {
-        if ($e instanceof Exception) {
-            $e = get_class($e).': '.$e->getMessage();
-        }
-
-        $this->message = $e;
-
-        return false;
-    }
-
     /**
      * Determine if the validation rule passes.
      *
@@ -55,15 +44,6 @@ class UserPermissions implements Rule
         return true;
     }
 
-    protected function assertRead()
-    {
-        $response = $this->client->get();
-
-        if (!is_array($response)) {
-            throw new Failure('Cannot read data.');
-        }
-    }
-
     /**
      * Get the validation error message.
      *
@@ -72,6 +52,26 @@ class UserPermissions implements Rule
     public function message()
     {
         return $this->message;
+    }
+
+    protected function fail($e) : bool
+    {
+        if ($e instanceof Exception) {
+            $e = get_class($e).': '.$e->getMessage();
+        }
+
+        $this->message = $e;
+
+        return false;
+    }
+
+    protected function assertRead()
+    {
+        $response = $this->client->get();
+
+        if (!is_array($response)) {
+            throw new Failure('Cannot read data.');
+        }
     }
 }
 
