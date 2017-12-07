@@ -30,6 +30,7 @@ class UserPermissions implements Rule
             'create',
             'read',
             'update',
+            'delete',
         ];
 
         foreach ($assertions as $assertion) {
@@ -112,6 +113,13 @@ class UserPermissions implements Rule
 
         if (!empty(array_diff_assoc($expected, $actual))) {
             throw new Failure('Cannot update data. Actual does not match expected.');
+        }
+    }
+
+    protected function assertDelete()
+    {
+        if ($this->client->delete($this->id) !== true) {
+            throw new Failure('Cannot delete data.');
         }
     }
 }
