@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Form;
 
 class AppServiceProvider extends ServiceProvider
 {

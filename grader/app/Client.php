@@ -13,7 +13,7 @@ class Client
 
     public function __construct(string $host, string $token)
     {
-        $this->sethost($host);
+        $this->setHost($host);
         $this->token = $token;
     }
 
@@ -38,16 +38,18 @@ class Client
 
     public function delete(int $id)
     {
-        return $this->send('DELETE', $id);
+        $response = null;
+        $this->send('DELETE', $id, [], $response);
+        return $response->status() == 204;
     }
 
-    protected function sethost(string $host)
+    protected function setHost(string $host)
     {
         if (filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            return $this->host = "http://$host";
+            $host = "http://$host";
         }
 
-        return $this->host = $host;
+        $this->host = $host;
     }
 
     protected function authenticate()
@@ -72,7 +74,7 @@ class Client
         return $url;
     }
 
-    protected function send(string $method, $query = null, array $data = [])
+    protected function send(string $method, $query = null, array $data = [], &$response = null)
     {
         $response = $this->authenticate()->$method($this->url($query), $data);
 
