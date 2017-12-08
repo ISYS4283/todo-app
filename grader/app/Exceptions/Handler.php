@@ -9,6 +9,7 @@ use Auth;
 use Mail;
 use App\User;
 use App;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -60,6 +61,11 @@ class Handler extends ExceptionHandler
             'request'   => Request::fullUrl() . PHP_EOL
                         . print_r(Request::all(), true),
         ];
+
+        if ($exception instanceof ValidationException) {
+            $data['validations'] = print_r($exception->validator->failed(), true);
+        }
+
         Mail::send('email.exception', $data, function ($message) {
             $message->to(config('mail.err'))
                     ->subject('THROWN '.config('app.name'));
