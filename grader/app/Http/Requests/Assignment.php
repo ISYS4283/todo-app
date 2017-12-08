@@ -28,8 +28,8 @@ class Assignment extends FormRequest
     public function rules()
     {
         return [
-            'ip-address' => ['bail', 'required', new ValidHostname],
-            'user-token' => [
+            'host' => ['bail', 'required', new ValidHostname],
+            'user_token' => [
                 'bail',
                 'required',
                 new ParseableToken,

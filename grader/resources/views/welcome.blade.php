@@ -24,32 +24,34 @@
     <form method="post">
         {{ csrf_field() }}
 
-        <div class="form-group {{ $errors->has('ip-address') ? 'has-error' : '' }}">
-            <label for="ip-address" class="control-label">Server IP Address</label>
+        <div class="form-group {{ $errors->has('host') ? 'has-error' : '' }}">
+            <label for="host" class="control-label">Server IP Address</label>
             <input class="form-control"
                    type="text"
-                   name="ip-address"
+                   id="host"
+                   name="host"
                    placeholder="for example: 10.9.0.198"
                    required
                    autofocus
-                   value="{{ old('ip-address') }}">
-            @if ($errors->has('ip-address'))
-                @foreach ($errors->get('ip-address') as $msg)
+                   value="{{ old('host') }}">
+            @if ($errors->has('host'))
+                @foreach ($errors->get('host') as $msg)
                     <span class="label label-danger">{{ $msg }}</span>
                 @endforeach
             @endif
         </div>
 
-        <div class="form-group {{ $errors->has('user-token') ? 'has-error' : '' }}">
-            <label for="user-token" class="control-label">User Token</label>
+        <div class="form-group {{ $errors->has('user_token') ? 'has-error' : '' }}">
+            <label for="user_token" class="control-label">User Token</label>
             <input class="form-control"
                    type="text"
-                   name="user-token"
+                   id="user_token"
+                   name="user_token"
                    placeholder="for example: eyJ1c2VybmFtZSI6ImplZmYiLCJwYXNzd29yZCI6IklTWVM0MjgzIGlzIHRoZSBiZXN0ISIsImRhdGFiYXNlIjoidG9kb2FwcCIsImhvc3RuYW1lIjoibG9jYWxob3N0In0="
                    required
-                   value="{{ old('user-token') }}">
-            @if ($errors->has('user-token'))
-                @foreach ($errors->get('user-token') as $msg)
+                   value="{{ old('user_token') }}">
+            @if ($errors->has('user_token'))
+                @foreach ($errors->get('user_token') as $msg)
                     <span class="label label-danger">{{ $msg }}</span>
                 @endforeach
             @endif

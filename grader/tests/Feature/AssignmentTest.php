@@ -10,13 +10,13 @@ class AssignmentTest extends TestCase
 {
     protected function makeAssignment(array $override = [])
     {
-        if (is_array($override['user-token'] ?? null)) {
-            $override['user-token'] = Authenticator::fake($override['user-token'])->getToken();
+        if (is_array($override['user_token'] ?? null)) {
+            $override['user_token'] = Authenticator::fake($override['user_token'])->getToken();
         }
 
         return array_replace([
-            'ip-address' => 'http://localhost:' . getenv('TEST_SERVER_PORT'),
-            'user-token' => getenv('REGULAR_USER_TOKEN')
+            'host' => 'http://localhost:' . getenv('TEST_SERVER_PORT'),
+            'user_token' => getenv('REGULAR_USER_TOKEN')
         ], $override);
     }
 
@@ -34,9 +34,9 @@ class AssignmentTest extends TestCase
         $this
             ->signIn()
             ->post('/', $this->makeAssignment([
-                'user-token' => 'Not Base64',
+                'user_token' => 'Not Base64',
             ]))
-            ->assertSessionHasErrors(['user-token'])
+            ->assertSessionHasErrors(['user_token'])
         ;
     }
 }

@@ -24,7 +24,7 @@ class UserPermissions implements Rule
      */
     public function passes($attribute, $value)
     {
-        $this->client = new Client(request()->get('ip-address'), $value);
+        $this->client = new Client(request()->get('host'), $value);
 
         $assertions = [
             'create',
