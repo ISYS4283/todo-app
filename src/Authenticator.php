@@ -55,6 +55,11 @@ class Authenticator
             throw new MissingToken;
         }
 
+        return static::createFromToken($token);
+    }
+
+    public static function createFromToken(string $token) : Authenticator
+    {
         $json = base64_decode($token);
         if ($json === false) {
             throw new BadBase64Encoding;
@@ -98,6 +103,18 @@ class Authenticator
     public static function createFromFormRequest()
     {
         return static::createFromArray($_POST);
+    }
+
+    public static function fake(array $override = []) : Authenticator
+    {
+        $faker = \Faker\Factory::create();
+
+        return static::createFromArray(array_replace([
+            'hostname' => 'localhost',
+            'database' => $faker->word,
+            'username' => $faker->word,
+            'password' => 'ISYS4283 is the best!',
+        ], $override));
     }
 }
 
