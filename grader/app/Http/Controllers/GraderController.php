@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Assignment;
+use App\Http\Requests\Submission;
 
 class GraderController extends Controller
 {
-    public function grade(Assignment $request)
+    public function grade(Submission $request)
     {
         return 'success';
     }

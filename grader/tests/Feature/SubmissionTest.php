@@ -6,9 +6,13 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use ISYS4283\ToDo\Authenticator;
 
-class AssignmentTest extends TestCase
+class SubmissionTest extends TestCase
 {
-    protected function makeAssignment(array $override = [])
+    /**
+     * Factory for live testing a network connection.
+     * See also factory for fake Submission::class
+     */
+    protected function makeLiveSubmission(array $override = []) : array
     {
         if (is_array($override['user_token'] ?? null)) {
             $override['user_token'] = Authenticator::fake($override['user_token'])->getToken();
@@ -20,11 +24,11 @@ class AssignmentTest extends TestCase
         ], $override);
     }
 
-    public function test_creates_assignment()
+    public function test_creates_submission()
     {
         $this
             ->signIn()
-            ->post('/', $this->makeAssignment())
+            ->post('/', $this->makeLiveSubmission())
             ->assertSuccessful()
         ;
     }
@@ -33,7 +37,7 @@ class AssignmentTest extends TestCase
     {
         $this
             ->signIn()
-            ->post('/', $this->makeAssignment([
+            ->post('/', $this->makeLiveSubmission([
                 'user_token' => 'Not Base64',
             ]))
             ->assertSessionHasErrors(['user_token'])

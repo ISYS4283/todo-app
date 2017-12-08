@@ -8,7 +8,7 @@ use App\Rules\ParseableToken;
 use App\Rules\StrongPassword;
 use App\Rules\UserPermissions;
 
-class Assignment extends FormRequest
+class Submission extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
