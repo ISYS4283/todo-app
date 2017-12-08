@@ -11,6 +11,9 @@
 |
 */
 
-Route::view('/', 'welcome');
+Route::group(['middleware' => ['auth']], function () {
+    Route::view('/', 'welcome');
+    Route::post('/', 'GraderController@grade');
+});
 
-Route::post('/', 'GraderController@grade');
+Route::name('login')->get('/login', '\\'.Route::getRoutes()->getByName('shibboleth-login')->getActionName());

@@ -23,6 +23,7 @@ class AssignmentTest extends TestCase
     public function test_creates_assignment()
     {
         $this
+            ->signIn()
             ->post('/', $this->makeAssignment())
             ->assertSuccessful()
         ;
@@ -31,6 +32,7 @@ class AssignmentTest extends TestCase
     public function test_validates_token_instance()
     {
         $this
+            ->signIn()
             ->post('/', $this->makeAssignment([
                 'user-token' => 'Not Base64',
             ]))
