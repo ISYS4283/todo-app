@@ -13,7 +13,7 @@
 
 Route::group(['middleware' => ['auth']], function () {
     Route::view('/', 'welcome');
-    Route::post('/', 'GraderController@grade');
+    Route::post('/', 'SubmissionController@store');
 });
 
 Route::name('login')->get('/login', '\\'.Route::getRoutes()->getByName('shibboleth-login')->getActionName());

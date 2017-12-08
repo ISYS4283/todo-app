@@ -28,7 +28,7 @@ class Submission extends FormRequest
     public function rules()
     {
         return [
-            'host' => ['bail', 'required', new ValidHostname],
+            'host' => ['bail', 'required', 'unique:submissions', new ValidHostname],
             'user_token' => [
                 'bail',
                 'required',
@@ -36,6 +36,18 @@ class Submission extends FormRequest
                 new StrongPassword,
                 new UserPermissions,
             ],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'host.unique' => 'This IP address has already been used for a submission.',
         ];
     }
 }

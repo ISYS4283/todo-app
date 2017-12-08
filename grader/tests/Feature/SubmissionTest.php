@@ -8,6 +8,8 @@ use ISYS4283\ToDo\Authenticator;
 
 class SubmissionTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Factory for live testing a network connection.
      * See also factory for fake Submission::class
@@ -26,11 +28,17 @@ class SubmissionTest extends TestCase
 
     public function test_creates_submission()
     {
+        $expected = $this->makeLiveSubmission();
+        $user = factory(\App\User::class)->create();
+
         $this
-            ->signIn()
-            ->post('/', $this->makeLiveSubmission())
+            ->signIn($user)
+            ->post('/', $expected)
             ->assertSuccessful()
         ;
+
+        $expected['user_id'] = $user->id;
+        $this->assertDatabaseHas('submissions', $expected);
     }
 
     public function test_validates_token_instance()
