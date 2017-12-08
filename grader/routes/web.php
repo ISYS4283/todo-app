@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::view('/', 'welcome');
+    Route::get('/', 'SubmissionController@create');
     Route::post('/', 'SubmissionController@store');
 });
 
