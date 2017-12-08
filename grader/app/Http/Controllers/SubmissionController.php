@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Submission as SubmissionRequest;
 use App\Submission;
 use Auth;
+use App;
+use App\Blackboard;
 
 class SubmissionController extends Controller
 {
@@ -22,6 +24,10 @@ class SubmissionController extends Controller
         $submission = Submission::make($request->all());
 
         Auth::user()->submissions()->save($submission);
+
+        if (App::environment() !== 'testing') {
+            (new Blackboard)->postGradeForStudent(Auth::user());
+        }
 
         return view('submitted');
     }

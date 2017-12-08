@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Submission::class);
     }
+
+    public function getUsername() : string
+    {
+        return strstr($this->attributes['email'], '@', true);
+    }
 }
