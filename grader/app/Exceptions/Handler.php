@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
         ];
 
         if ($exception instanceof ValidationException) {
-            $data['validations'] = print_r($exception->validator->failed(), true);
+            $data['validations'] = $this->getValidationErrors($exception);
         }
 
         Mail::send('email.exception', $data, function ($message) {
@@ -72,6 +72,13 @@ class Handler extends ExceptionHandler
         });
 
         parent::report($exception);
+    }
+
+    protected function getValidationErrors(ValidationException $exception) : string
+    {
+        $failed = $exception->validator->failed();
+        $messages = $exception->validator->errors()->messages();
+        return print_r(array_merge_recursive($failed, $messages), true);
     }
 
     /**

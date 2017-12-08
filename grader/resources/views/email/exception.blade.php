@@ -2,6 +2,7 @@
 
 <p>There was an exception thrown in {{ config('app.name') }}.</p>
 <p>{{ get_class($exception) }}</p>
+<p>{{ $exception->getMessage() }}</p>
 
 <h2>User</h2>
 <pre>{{ $user }}</pre>
