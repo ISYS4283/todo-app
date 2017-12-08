@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'isys4283@uark.edu'),
+        'name' => env('MAIL_FROM_NAME', 'TODO Grader'),
     ],
 
     /*
@@ -120,4 +120,5 @@ return [
         ],
     ],
 
+    'err' => env('MAIL_ERROR_TO_ADDRESS', 'jpucket@uark.edu'),
 ];
